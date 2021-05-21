@@ -12,8 +12,17 @@ export default function useDogs() {
         mutate('http://localhost:7890/api/v1/dogs', [...dogs, dog], false);
     };
 
+    const removeDog = (deletedDog) => {
+        mutate(
+            'http://localhost:7890/api/v1/dogs',
+            dogs.filter(dog => dog.id !== deletedDog.id),
+            false
+        );
+    };
+
     return {
         dogs,
-        addDog
+        addDog,
+        removeDog
     };
 }

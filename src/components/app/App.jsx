@@ -1,6 +1,6 @@
 import React from 'react';
-import Sandbox from './sandbox/Sandbox';
+import Dogs from './Dogs';
 
 export default function App() {
-  return <Sandbox />;
+  return <Dogs />;
 }
