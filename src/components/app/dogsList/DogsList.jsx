@@ -3,20 +3,19 @@
 /* eslint-disable indent */
 import React, { useState } from 'react';
 import useSWR, { mutate } from 'swr';
+import useDogs from '../../../hooks/useDogs';
 import { postDog } from '../../../services/fetches';
 
 export default function DogsList() {
 
-    const fetcher = url => fetch(url).then(res => res.json());
-
-    const { data: dogs } = useSWR('http://localhost:7890/api/v1/dogs', fetcher);
+    const { dogs, addDog } = useDogs();
 
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
 
     const handlePostDog = () => {
         postDog({ name, age })
-            .then(dog => mutate('http://localhost:7890/api/v1/dogs', [...dogs, dog], false));
+            .then(addDog);
 
         setName('');
         setAge('');
@@ -29,6 +28,7 @@ export default function DogsList() {
         </li>
     ));
 
+    if (!dogs) return <h2>Loading...</h2>;
     return (
         <>
             <input
