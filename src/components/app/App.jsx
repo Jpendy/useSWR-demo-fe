@@ -1,5 +1,6 @@
 import React from 'react';
+import Sandbox from './sandbox/Sandbox';
 
 export default function App() {
-  return <h1>Hello World</h1>;
+  return <Sandbox />;
 }
